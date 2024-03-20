@@ -23,10 +23,10 @@ create table if not exists `user`(
     );
 
 insert into `user` (role_id, username, password, full_name, email, address, phone, avatar, is_activated) values
-(1, 'tuadmin', '$2a$12$QiI.WkWbo18YvvQXMIX5puVftFympthz/GIdz9S/hkUdmp7I0qKK.C', 'Nguyễn Hoàng Tú', 'tunguyen.admin@gmail.com',
+(1, 'tuadmin', '$2a$12$dHFuwy4CVVjgl8dqt8txWOxiXoj01ELxJd6ln1MMVH38RBvFeymNe', 'Nguyễn Hoàng Tú', 'tunguyen.admin@gmail.com',
  'Hồ Chí Minh', '0908710899', 'avatar1.png', true) -- password: admin
 ,(2, 'tyuser', '$2a$12$dZgVGo/YkNdoOdcSE3mSbOfrLidft/y/KFFzGRhX.bh//lks07Kuu', 'Nguyễn Văn Tý', 'tynguyen.user@gmail.com',
-                                                                                                                'Hồ Chí Minh', '0985678910', 'avatar1.jpg', true) -- password: 123456
+'Hồ Chí Minh', '0985678910', 'avatar1.jpg', true) -- password: 123456
 ,(2, 'teouser', '$2a$12$dZgVGo/YkNdoOdcSE3mSbOfrLidft/y/KFFzGRhX.bh//lks07Kuu', 'Nguyễn Văn Tèo', 'teonguyen.user@gmail.com',
-                                                                                                                'Hồ Chí Minh', '0981234567', 'avatar1.jpg', true) -- password: 123456
+'Hồ Chí Minh', '0981234567', 'avatar1.jpg', true) -- password: 123456
 ;
