@@ -1,11 +1,12 @@
 package com.codegym.casemodule5.service;
 
-import com.codegym.casemodule5.dto.order.OrderDtoRepsonse;
+import com.codegym.casemodule5.dto.DrugDto;
+import com.codegym.casemodule5.model.Category;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
 public interface IOrderService {
-    List<OrderDtoRepsonse> findAll();
-    OrderDtoRepsonse findById(Long id);
-//    OrderDtoRepsonse add(OrderDtoRepsonse orderDto);
+    List<Category> getCategory(List<Category> categories);
+
 }

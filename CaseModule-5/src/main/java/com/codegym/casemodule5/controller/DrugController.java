@@ -5,8 +5,10 @@ import com.codegym.casemodule5.model.Category;
 import com.codegym.casemodule5.model.Drug;
 import com.codegym.casemodule5.service.IDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/drugs")
+@CrossOrigin("*")
 public class DrugController {
     @Autowired
     private IDrugService iDrugService;
@@ -75,5 +78,10 @@ public class DrugController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/sort")
+    public ResponseEntity<List<DrugDto>> findAllOrderByPrice(){
+        Sort sort = Sort.by(Sort.Direction.ASC, "price");
+        return new ResponseEntity<>(iDrugService.findAllOrderByPrice(sort) ,HttpStatus.OK);
 
+    }
 }

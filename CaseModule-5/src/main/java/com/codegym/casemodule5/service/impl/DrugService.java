@@ -9,6 +9,7 @@ import com.codegym.casemodule5.repository.IDrugCategoryRepository;
 import com.codegym.casemodule5.repository.IDrugRepository;
 import com.codegym.casemodule5.service.IDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,6 +70,12 @@ public class DrugService implements IDrugService {
             categoryDrug.setQuantity(drugDto.getQuantity());
             iDrugCategoryRepository.save(categoryDrug);
         }
+        List<Category> categories = new ArrayList<>();
+        for(Category c : drugDto.getCategories()){
+            Category category = iCategoryRepository.findById(c.getId()).get();
+            categories.add(category);
+        }
+        drugDto.setCategories(categories);
         return drugDto;
     }
 
@@ -101,7 +108,6 @@ public class DrugService implements IDrugService {
             List<Category> categories = new ArrayList<>();
             Category category1 = categoryDrug.getCategory();
             categories.add(category1);
-            int quantity = categoryDrug.getQuantity();
             drugDtos.add(buildDTOResponseFromDrug(drug));
         }
         return drugDtos;
@@ -135,6 +141,17 @@ public class DrugService implements IDrugService {
         }
         return drugDtos;
     }
+
+    @Override
+    public List<DrugDto> findAllOrderByPrice(Sort sort){
+        List<Drug> drugs = iDrugRepository.findAll(sort);
+        List<DrugDto> drugDtos = new ArrayList<>();
+        for(Drug d : drugs){
+            drugDtos.add(buildDTOResponseFromDrug(d));
+        }
+        return drugDtos;
+    }
+
      public DrugDto buildDTOResponseFromDrug(Drug drug){
         int quantity = 0;
          List<Category> categories = new ArrayList<>();
