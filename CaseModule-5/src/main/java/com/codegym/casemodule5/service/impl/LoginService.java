@@ -1,10 +1,9 @@
 package com.codegym.casemodule5.service.impl;
 
 import com.codegym.casemodule5.config.TokenProvider;
-import com.codegym.casemodule5.payload.LoginRequest;
-import com.codegym.casemodule5.payload.LoginResponse;
+import com.codegym.casemodule5.payload.login.LoginRequest;
+import com.codegym.casemodule5.payload.login.LoginResponse;
 import com.codegym.casemodule5.service.ILoginService;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

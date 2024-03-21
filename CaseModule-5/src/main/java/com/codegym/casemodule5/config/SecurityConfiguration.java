@@ -59,13 +59,10 @@ public class SecurityConfiguration {
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
-
         httpSecurity.exceptionHandling(exception ->
                 exception.authenticationEntryPoint(authEntryPoint));
-
-//        httpSecurity.sessionManagement(session ->
-//                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
+        httpSecurity.sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/**","/api/auth/login",
                         "/api/auth/logout","/api/auth/register").permitAll());
