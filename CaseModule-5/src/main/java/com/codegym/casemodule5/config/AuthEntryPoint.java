@@ -13,14 +13,16 @@ import java.io.IOException;
 
 @Component
 public class AuthEntryPoint implements AuthenticationEntryPoint {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthEntryPoint.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AuthEntryPoint.class);
 
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException)
             throws IOException {
-        LOGGER.error("Responding with unauthorized error. Message - {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+//        LOGGER.error("Responding with unauthorized error. Message - {}", authException.getMessage());
+//        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("Unauthorized");
     }
 }
