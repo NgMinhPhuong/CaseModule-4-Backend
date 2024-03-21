@@ -1,38 +1,29 @@
-package com.codegym.casemodule5.model;
+package com.codegym.casemodule5.dto;
 
+import com.codegym.casemodule5.model.Category;
+import com.codegym.casemodule5.model.Drug;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-@Entity
-@Table(name = "drug")
-public class Drug {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DrugDto {
     private  Long id;
     private String name;
     private int price;
+    private int quantity;
+    private List<Category> categories;
     private String expire;
 
 }
