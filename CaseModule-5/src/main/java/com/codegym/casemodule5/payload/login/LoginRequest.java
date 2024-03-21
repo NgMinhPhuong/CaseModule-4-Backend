@@ -1,11 +1,10 @@
-package com.codegym.casemodule5.payload;
+package com.codegym.casemodule5.payload.login;
 
 import com.codegym.casemodule5.dto.LoginDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter

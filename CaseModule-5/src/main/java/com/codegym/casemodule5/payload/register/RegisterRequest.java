@@ -1,5 +1,6 @@
-package com.codegym.casemodule5.payload;
+package com.codegym.casemodule5.payload.register;
 
+import com.codegym.casemodule5.dto.RegisterDto;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -9,12 +10,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponse {
-    @NotBlank
-    private String message;
+@NoArgsConstructor
+public class RegisterRequest {
 
-    @Nullable
-    private String token;
+    private RegisterDto registerDto;
 }

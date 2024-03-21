@@ -3,14 +3,9 @@ package com.codegym.casemodule5.config;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class PasswordEncoder {
-
     public static String hashPassword(String plainTextPassword) {
-        // Generate a salt for hashing
         String salt = BCrypt.gensalt();
-
-        // Hash the password with the generated salt
         String hashedPassword = BCrypt.hashpw(plainTextPassword, salt);
-
         return hashedPassword;
     }
 
