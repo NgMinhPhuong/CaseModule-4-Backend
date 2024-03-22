@@ -1,4 +1,4 @@
-use drugstore;
+use case_module4;
 create table if not exists `role` (
     id int not null auto_increment primary key,
     name varchar(50) not null,
