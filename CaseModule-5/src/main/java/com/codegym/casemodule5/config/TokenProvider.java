@@ -48,13 +48,6 @@ public class TokenProvider {
         return claims.getSubject();
     }
 
-    public String getTokenFromBearerToken(String jwtString) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecretKey)
-                .parseClaimsJws(jwtString)
-                .getBody();
-        return claims.getSubject();
-    }
 
     public String getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
