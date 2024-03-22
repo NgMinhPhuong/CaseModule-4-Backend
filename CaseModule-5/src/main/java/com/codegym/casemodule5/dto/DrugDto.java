@@ -25,5 +25,5 @@ public class DrugDto {
     private int quantity;
     private List<Category> categories;
     private String expire;
-
+    private String image;
 }
