@@ -169,6 +169,7 @@ public class DrugService implements IDrugService {
         drugDto.setCategories(categories);
         drugDto.setImage(drug.getImage());
         drugDto.setQuantity(quantity);
+        drugDto.setImage(drugDto.getImage());
         return drugDto;
      }
 

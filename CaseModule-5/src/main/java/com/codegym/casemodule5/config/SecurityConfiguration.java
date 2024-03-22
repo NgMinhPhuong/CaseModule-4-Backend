@@ -83,6 +83,15 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/users/**").hasAnyRole("ADMIN", "USER")
         );
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.GET,"/api/drugs/**").permitAll()
+        );
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.POST,"/api/drugs/**").hasAnyRole("ADMIN")
+        );httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.DELETE,"/api/drugs/**").hasAnyRole("ADMIN")
+        );
+
         httpSecurity.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(authEntryPoint));
         httpSecurity.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
