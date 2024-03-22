@@ -23,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/drugs")
-@CrossOrigin("*")
+
 public class DrugController {
     @Autowired
     private IDrugService iDrugService;
