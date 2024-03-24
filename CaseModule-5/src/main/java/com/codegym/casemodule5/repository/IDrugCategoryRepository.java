@@ -14,7 +14,6 @@ public interface IDrugCategoryRepository extends JpaRepository<CategoryDrug, Lon
     List<CategoryDrug> findByDrug(Drug drug);
     List<CategoryDrug> findByCategory(Category category);
     void deleteByDrug(Drug drug);
-    List<CategoryDrug> findByQuantityBetween(int price1, int price2);
 
     @Modifying
     @Query(nativeQuery = true, value = "update category_drug set quantity = ?1 where drug_id = ?2")

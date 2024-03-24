@@ -76,9 +76,11 @@ public class SecurityConfiguration {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/auth/login",
-                        "/api/auth/logout", "/api/auth/register","/api/drugs/**").permitAll());
+                        "/api/auth/logout", "/api/auth/register","/api/drugs/**","/api/category").permitAll());
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers("/api/carts/**").authenticated());
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/users/**").hasAnyRole("ADMIN", "USER")
@@ -87,8 +89,9 @@ public class SecurityConfiguration {
                 req -> req.requestMatchers(HttpMethod.GET,"/api/drugs/**").permitAll()
         );
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers(HttpMethod.POST,"/api/drugs/**").hasAnyRole("ADMIN")
-        );httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.POST,"/api/drugs/**").permitAll()//hasAnyRole("ADMIN")
+        );
+        httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers(HttpMethod.DELETE,"/api/drugs/**").hasAnyRole("ADMIN")
         );
 
