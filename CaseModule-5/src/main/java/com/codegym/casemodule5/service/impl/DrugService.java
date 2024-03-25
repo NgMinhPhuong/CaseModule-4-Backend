@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -161,7 +164,6 @@ public class DrugService implements IDrugService {
         drugDto.setCategories(categories);
         drugDto.setImage(drug.getImage());
         drugDto.setQuantity(quantity);
-        drugDto.setImage(drugDto.getImage());
         return drugDto;
      }
 
@@ -171,6 +173,7 @@ public class DrugService implements IDrugService {
         drug.setName(drugDto.getName());
         drug.setPrice(drugDto.getPrice());
         drug.setExpire(drugDto.getExpire());
+        drug.setImage(drugDto.getImage());
         return drug;
     }
 

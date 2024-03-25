@@ -1,16 +1,12 @@
 package com.codegym.casemodule5.controller;
 
 import com.codegym.casemodule5.dto.DrugDto;
-import com.codegym.casemodule5.model.Category;
-import com.codegym.casemodule5.model.Drug;
 import com.codegym.casemodule5.service.IDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -68,13 +62,6 @@ public class DrugController {
     }
     @PostMapping("/create")
     public ResponseEntity<DrugDto> create(@ModelAttribute DrugDto drugDto){
-//        String fileName = multipartFile.getOriginalFilename();
-//        try {
-//            FileCopyUtils.copy(multipartFile.getBytes(), new File(upload + fileName));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        drugDto.setImage(upload + fileName);
         return new ResponseEntity<>(iDrugService.add(drugDto), HttpStatus.CREATED);
     }
     @PutMapping("/update")
