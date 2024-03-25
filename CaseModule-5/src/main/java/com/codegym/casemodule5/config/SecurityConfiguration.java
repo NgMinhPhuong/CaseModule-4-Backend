@@ -76,12 +76,18 @@ public class SecurityConfiguration {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/auth/login",
-                        "/api/auth/logout", "/api/auth/register","/api/drugs/**").permitAll());
+                        "/api/auth/logout","/api/drugs/**").permitAll());
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/roles/**").hasAnyRole("ADMIN"));
 
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers("/api/users/**").hasAnyRole("ADMIN", "USER")
+                req -> req.requestMatchers(HttpMethod.GET,"/api/users/**").hasAnyRole("ADMIN")
+        );
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.POST,"/api/users/**").permitAll()
+        );
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(HttpMethod.DELETE,"/api/users/**").hasAnyRole("ADMIN")
         );
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers(HttpMethod.GET,"/api/drugs/**").permitAll()

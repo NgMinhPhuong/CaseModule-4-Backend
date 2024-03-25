@@ -9,7 +9,7 @@ insert into `role`(name,description) values ('ROLE_ADMIN','Admin'),('ROLE_USER',
 
 create table if not exists `user`(
     id int not null auto_increment primary key,
-    role_id int not null,
+    role_id int not null default 2,
     username varchar(100) not null,
     password varchar(100) not null,
     full_name varchar(100) not null,
