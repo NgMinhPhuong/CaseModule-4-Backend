@@ -1,4 +1,5 @@
 package com.codegym.casemodule5.config;
+import com.codegym.casemodule5.model.Role;
 import com.codegym.casemodule5.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,13 @@ public class UserPrincipal implements UserDetails {
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+
+    public UserPrincipal(String username, String password,
+                         Collection<? extends GrantedAuthority> authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
     public static UserPrincipal create(User user) {
         String roleName = user.getRole().getName();
@@ -75,4 +83,12 @@ public class UserPrincipal implements UserDetails {
     public int hashCode() {
         return Objects.hash(id, username, password, authorities);
     }
+
+//    public static UserPrincipal build(User user){
+//        List<GrantedAuthority> authorities1 = new ArrayList<>();
+//        for (Role role : user.getRole()){
+//            authorities1.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return new UserPrincipal(user.getUsername(),user.getPassword(),authorities1);
+//    }
 }

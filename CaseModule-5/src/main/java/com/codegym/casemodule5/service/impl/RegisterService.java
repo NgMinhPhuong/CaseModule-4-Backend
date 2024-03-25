@@ -33,14 +33,13 @@ public class RegisterService implements IRegisterService {
     @Override
     public RegisterResponse register(RegisterRequest registerRequest) {
         UserDto userDto = registerRequest.getRegisterDto().getUserDto();
-        if (!isUserExisted(userDto)){
-            return new RegisterResponse("Register failed!",null);
+        if (!isUserExisted(userDto)) {
+            return new RegisterResponse("Register failed!", null);
         } else {
             User newUser = modelMapper.map(userDto, User.class);
             newUser.setIsActivated(StatusType.IS_ACTIVATED.getIsActivated());
             String password = bCryptPasswordEncoder.encode(newUser.getPassword());
             newUser.setPassword(password);
-
             Role userRole = roleRepository.findById(RoleType.ROLE_USER.getId()).orElse(null);
             newUser.setRole(userRole);
 
@@ -48,13 +47,14 @@ public class RegisterService implements IRegisterService {
             UserDto userDtoCreated = modelMapper.map(userCreated, UserDto.class);
             RoleDto roleDtoCreated = modelMapper.map(userRole, RoleDto.class);
 
-            RegisterDto registerDto = new RegisterDto(userDtoCreated,roleDtoCreated);
-            return new RegisterResponse("Register successfully!",registerDto);
+            RegisterDto registerDto = new RegisterDto(userDtoCreated, roleDtoCreated);
+            return new RegisterResponse("Register successfully!", registerDto);
         }
     }
 
-    private Boolean isUserExisted(UserDto newUserDto){
+    private Boolean isUserExisted(UserDto newUserDto) {
         User currentUser = userRepository.findByUsername(newUserDto.getUsername()).orElse(null);
+        System.out.println(currentUser);
         return Optional.ofNullable(currentUser).isEmpty();
     }
 }

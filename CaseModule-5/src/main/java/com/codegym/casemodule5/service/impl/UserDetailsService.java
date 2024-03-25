@@ -1,4 +1,5 @@
 package com.codegym.casemodule5.service.impl;
+
 import com.codegym.casemodule5.config.UserPrincipal;
 import com.codegym.casemodule5.model.User;
 import com.codegym.casemodule5.repository.IUserRepository;
