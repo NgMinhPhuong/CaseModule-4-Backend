@@ -1,7 +1,9 @@
 package com.codegym.casemodule5.service.impl;
 
 import com.codegym.casemodule5.dto.UserDto;
+import com.codegym.casemodule5.model.Role;
 import com.codegym.casemodule5.model.User;
+import com.codegym.casemodule5.repository.IRoleRepository;
 import com.codegym.casemodule5.repository.IUserRepository;
 import com.codegym.casemodule5.service.IUserService;
 import org.modelmapper.ModelMapper;
@@ -26,6 +28,8 @@ import java.util.Optional;
 public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IRoleRepository roleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
     private ModelMapper modelMapper =  new ModelMapper();
@@ -97,11 +101,18 @@ public class UserService implements IUserService {
 
     @Override
     public boolean add(UserDto userDTO) {
+
+
         if (!(userRepository.findByUsernameOrEmailOrPhone(userDTO.getUsername(), userDTO.getEmail(), userDTO.getPhone()).isPresent())) {
             User user = User.builder().username(userDTO.getUsername())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
+                    .address(userDTO.getAddress())
                     .email(userDTO.getEmail())
-                    .phone(userDTO.getEmail()).build();
+                    .avatar(userDTO.getAvatar())
+                    .fullName(userDTO.getFullName())
+                    .role(roleRepository.findById(Long.valueOf(userDTO.getRoleId())).orElse(null))
+                    .isActivated(userDTO.getIsActivated())
+                    .phone(userDTO.getPhone()).build();
             userRepository.save(user);
             return true;
         }

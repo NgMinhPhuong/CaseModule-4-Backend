@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserDto implements Serializable {
     private String username;
@@ -20,8 +19,12 @@ public class UserDto implements Serializable {
     private String fullName;
     private String email;
     private String address;
-    private Set<Role> roles;
+    private Integer roleId;
     private String phone;
     private String avatar;
     private Boolean isActivated;
+
+    public UserDto() {
+        this.roleId = 2;
+    }
 }
