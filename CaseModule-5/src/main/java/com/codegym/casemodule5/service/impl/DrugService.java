@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -127,15 +130,7 @@ public class DrugService implements IDrugService {
     @Override
     public List<DrugDto> findByPrice(int priceTop, int priceBot) {
         List<DrugDto> drugDtos = new ArrayList<>();
-        List<CategoryDrug> categoryDrugs = iDrugCategoryRepository.findByQuantityBetween(priceTop, priceBot);
-        List<Drug> drugs = new ArrayList<>();
-        List<Long> check = new ArrayList<>();
-        for(CategoryDrug categoryDrug : categoryDrugs){
-            if(!check.contains(categoryDrug.getDrug().getId())){
-                drugs.add(categoryDrug.getDrug());
-                check.add(categoryDrug.getDrug().getId());
-            }
-        }
+        List<Drug> drugs = iDrugRepository.findByPriceBetween(priceTop, priceBot);
         for(Drug drug1 : drugs){
             drugDtos.add(buildDTOResponseFromDrug(drug1));
         }
@@ -168,8 +163,8 @@ public class DrugService implements IDrugService {
         drugDto.setExpire(drug.getExpire());
         drugDto.setCategories(categories);
         drugDto.setImage(drug.getImage());
+        drugDto.setDescription(drug.getDescription());
         drugDto.setQuantity(quantity);
-        drugDto.setImage(drugDto.getImage());
         return drugDto;
      }
 
@@ -180,6 +175,7 @@ public class DrugService implements IDrugService {
         drug.setPrice(drugDto.getPrice());
         drug.setExpire(drugDto.getExpire());
         drug.setImage(drugDto.getImage());
+        drug.setDescription(drugDto.getDescription());
         return drug;
     }
 

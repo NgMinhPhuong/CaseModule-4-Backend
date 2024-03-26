@@ -35,4 +35,5 @@ public class Drug {
     private int price;
     private String expire;
     private String image;
+    private String description;
 }

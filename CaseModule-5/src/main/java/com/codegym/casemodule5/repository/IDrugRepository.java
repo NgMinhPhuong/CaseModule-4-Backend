@@ -13,6 +13,7 @@ import java.util.List;
 public interface IDrugRepository extends JpaRepository<Drug, Long> {
 
     List<Drug> findByNameLike(String name);
+    List<Drug> findByPriceBetween(int price1, int price2);
 
 
 

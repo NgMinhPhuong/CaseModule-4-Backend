@@ -1,16 +1,15 @@
 package com.codegym.casemodule5.controller;
 
 import com.codegym.casemodule5.dto.DrugDto;
-import com.codegym.casemodule5.model.Category;
-import com.codegym.casemodule5.model.Drug;
 import com.codegym.casemodule5.service.IDrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/drugs")
 
 public class DrugController {
+
+
     @Autowired
     private IDrugService iDrugService;
 
@@ -58,11 +60,11 @@ public class DrugController {
         return new ResponseEntity<>(iDrugService.findByPrice(price1, price2) ,HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<DrugDto> create(@RequestBody DrugDto drugDto){
+    public ResponseEntity<DrugDto> create(@ModelAttribute DrugDto drugDto){
         return new ResponseEntity<>(iDrugService.add(drugDto), HttpStatus.CREATED);
     }
     @PutMapping("/update")
-    public ResponseEntity<DrugDto> update(@RequestBody DrugDto drugDto){
+    public ResponseEntity<DrugDto> update(@ModelAttribute DrugDto drugDto){
         DrugDto drug1 = iDrugService.update(drugDto);
         if(drug1 == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -78,11 +80,15 @@ public class DrugController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/sort")
-    public ResponseEntity<List<DrugDto>> findAllOrderByPrice(){
+    @GetMapping("/sortASC")
+    public ResponseEntity<List<DrugDto>> findAllOrderByPriceASC(){
         Sort sort = Sort.by(Sort.Direction.ASC, "price");
         return new ResponseEntity<>(iDrugService.findAllOrderByPrice(sort) ,HttpStatus.OK);
-
+    }
+    @GetMapping("/sortDESC")
+    public ResponseEntity<List<DrugDto>> findAllOrderByPriceDESC(){
+        Sort sort = Sort.by(Sort.Direction.DESC, "price");
+        return new ResponseEntity<>(iDrugService.findAllOrderByPrice(sort) ,HttpStatus.OK);
     }
 
 
