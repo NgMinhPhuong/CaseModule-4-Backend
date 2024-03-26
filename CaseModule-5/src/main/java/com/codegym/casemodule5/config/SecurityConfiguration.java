@@ -3,6 +3,7 @@ package com.codegym.casemodule5.config;
 import com.codegym.casemodule5.repository.IUserRepository;
 import com.codegym.casemodule5.service.impl.UserDetailsService;
 import jakarta.servlet.Filter;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -97,7 +98,14 @@ public class SecurityConfiguration {
         );httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers(HttpMethod.DELETE,"/api/drugs/**").hasAnyRole("ADMIN")
         );
-
+        httpSecurity
+                .logout(logout -> logout
+                        .logoutUrl("/api/auth/logout") // specify your logout endpoint URL
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                        })
+                        .permitAll()
+                );
         httpSecurity.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(authEntryPoint));
         httpSecurity.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
