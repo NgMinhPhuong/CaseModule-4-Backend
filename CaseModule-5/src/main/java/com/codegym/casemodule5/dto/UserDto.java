@@ -26,5 +26,7 @@ public class UserDto implements Serializable {
 
     public UserDto() {
         this.roleId = 2;
+        this.isActivated = true;
     }
+
 }
