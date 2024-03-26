@@ -5,7 +5,7 @@ import com.codegym.casemodule5.payload.login.LoginResponse;
 import com.codegym.casemodule5.payload.register.RegisterRequest;
 import com.codegym.casemodule5.payload.register.RegisterResponse;
 import com.codegym.casemodule5.service.impl.LoginService;
-import com.codegym.casemodule5.service.impl.RegisterService;
+//import com.codegym.casemodule5.service.impl.RegisterService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ import java.util.Optional;
 public class AuthController {
     @Autowired
     private LoginService loginService;
-    @Autowired
-    private RegisterService regísterService;
+//    @Autowired
+//    private RegisterService registerService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
@@ -37,12 +37,13 @@ public class AuthController {
         return new ResponseEntity<>(loginResponse,HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
-        RegisterResponse registerResponse = regísterService.register(registerRequest);
-        if (Optional.ofNullable(registerResponse.getData()).isPresent()){
-            return new ResponseEntity<>(registerResponse,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(registerResponse,HttpStatus.BAD_REQUEST);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
+//        RegisterResponse registerResponse = registerService.register(registerRequest);
+//
+//        if (Optional.ofNullable(registerResponse.getData()).isPresent()){
+//            return new ResponseEntity<>(registerResponse,HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(registerResponse,HttpStatus.BAD_REQUEST);
+//    }
 }

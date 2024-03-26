@@ -24,6 +24,7 @@ public class AccessDeniedFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
         try {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException e) {
             // log error if needed here then redirect

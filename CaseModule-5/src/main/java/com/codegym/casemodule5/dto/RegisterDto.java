@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterDto {
+
     private UserDto userDto;
     private RoleDto roleDto;
 }

@@ -25,8 +25,7 @@ import java.util.List;
 @RequestMapping("/api/drugs")
 
 public class DrugController {
-    @Value("${upload}")
-    private String upload;
+
 
     @Autowired
     private IDrugService iDrugService;
@@ -65,7 +64,7 @@ public class DrugController {
         return new ResponseEntity<>(iDrugService.add(drugDto), HttpStatus.CREATED);
     }
     @PutMapping("/update")
-    public ResponseEntity<DrugDto> update(@RequestBody DrugDto drugDto){
+    public ResponseEntity<DrugDto> update(@ModelAttribute DrugDto drugDto){
         DrugDto drug1 = iDrugService.update(drugDto);
         if(drug1 == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -91,4 +90,6 @@ public class DrugController {
         Sort sort = Sort.by(Sort.Direction.DESC, "price");
         return new ResponseEntity<>(iDrugService.findAllOrderByPrice(sort) ,HttpStatus.OK);
     }
+
+
 }

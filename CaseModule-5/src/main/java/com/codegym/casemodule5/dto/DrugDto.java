@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -26,5 +27,6 @@ public class DrugDto {
     private int quantity;
     private List<Category> categories;
     private String expire;
+    private String description;
     private String image;
 }

@@ -163,6 +163,7 @@ public class DrugService implements IDrugService {
         drugDto.setExpire(drug.getExpire());
         drugDto.setCategories(categories);
         drugDto.setImage(drug.getImage());
+        drugDto.setDescription(drug.getDescription());
         drugDto.setQuantity(quantity);
         return drugDto;
      }
@@ -174,6 +175,7 @@ public class DrugService implements IDrugService {
         drug.setPrice(drugDto.getPrice());
         drug.setExpire(drugDto.getExpire());
         drug.setImage(drugDto.getImage());
+        drug.setDescription(drugDto.getDescription());
         return drug;
     }
 
