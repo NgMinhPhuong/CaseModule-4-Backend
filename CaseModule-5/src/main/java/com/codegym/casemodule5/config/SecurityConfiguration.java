@@ -77,7 +77,6 @@ public class SecurityConfiguration {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers("/api/auth/login",
-
                         "/api/auth/logout", "/api/auth/register","/api/category/**").permitAll());
 //        
 //        httpSecurity.authorizeHttpRequests(
@@ -93,7 +92,7 @@ public class SecurityConfiguration {
                 req -> req.requestMatchers(HttpMethod.GET,"/api/users/**").hasAnyRole("ADMIN")
         );
         httpSecurity.authorizeHttpRequests(
-                req -> req.requestMatchers(HttpMethod.POST,"/api/users/**").hasAnyRole("ADMIN")
+                req -> req.requestMatchers(HttpMethod.POST,"/api/users/**").permitAll()
         );
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers(HttpMethod.DELETE,"/api/users/**").hasAnyRole("ADMIN")
