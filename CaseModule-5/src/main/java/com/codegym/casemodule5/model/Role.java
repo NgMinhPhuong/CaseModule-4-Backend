@@ -17,7 +17,7 @@ import java.util.Collection;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role implements Serializable {
+public class    Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
